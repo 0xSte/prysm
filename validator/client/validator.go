@@ -970,7 +970,7 @@ func (v *validator) logDuties(slot primitives.Slot, currentEpochDuties []*ethpb.
 	for _, duty := range currentEpochDuties {
 		pubkey := fmt.Sprintf("%#x", duty.PublicKey)
 		if v.emitAccountMetrics {
-			ValidatorStatusesGaugeVec.WithLabelValues(pubkey).Set(float64(duty.Status))
+			ValidatorStatusesGaugeVec.WithLabelValues(pubkey, fmt.Sprintf("%#x", duty.ValidatorIndex)).Set(float64(duty.Status))
 		}
 
 		// Only interested in validators who are attesting/proposing.
